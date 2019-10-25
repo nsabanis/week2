@@ -12,25 +12,21 @@ public class AskAge {
     static final int MIN_AGE = 0;
     static final int MAX_AGE = 120;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
 
         sc = new Scanner(System.in);
 
-        boolean foundAnInteger = false;
+        boolean foundAValidInteger = false;
 
         int returnedInt;
 
-        while (!foundAnInteger) {
+        while (!foundAValidInteger) {
             returnedInt = getInteger();
-            foundAnInteger = true;
+            foundAValidInteger = true;
             if (!checkIfValidAge(returnedInt, MIN_AGE, MAX_AGE)) {
-                foundAnInteger = false;
+                foundAValidInteger = false;
             }
         }
-
         sc.close();
     }
 
@@ -47,12 +43,14 @@ public class AskAge {
 
     public static boolean checkIfValidAge(int age, int minAge, int maxAge) {
 
-        if (age >= minAge && age < maxAge) {
-            System.out.println("Your age is " + age);
-            return true;
-        } else {
-            System.out.println("Wrong input age");
+        if (age < minAge) {
+            System.err.println("Error. Input age is under" + minAge);
             return false;
+        } else if (age > maxAge) {
+            System.err.println("Error. Input age is over  " + maxAge);
+            return false;
+        } else {
+            return true;
         }
     }
 }
